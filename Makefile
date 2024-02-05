@@ -37,7 +37,7 @@ $(NAME): $(LIBFT) $(OBJECTS)
 	@echo "----------------"
 	@echo "make $(NAME) done.\n"
 	@echo "change permission of $(NAME)"
-	chmod -x $(NAME)
+	chmod 777 $(NAME)
 	@echo "----------------"
 	@echo "change permission of $(NAME) done.\n"
 
