@@ -6,34 +6,39 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:20 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/05 06:32:43 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/05 08:57:23 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_swap_free_stack(t_stack *list)
+void	push_swap_free_stack(t_stack *head)
 {
-	t_stack	*temp;
+	t_stack	*next;
+	t_stack	*delete;
 
-	temp = list -> next;
-	while(temp != list)
+	delete = head -> next;
+	while(delete != head)
 	{
-		temp = list->next;
-		free(list);
+		next = delete -> next;
+		free(delete);
+		delete = next;
 	}
+	free(delete);
 	return ;
 }
 
-void	push_swap_error(char *message, t_stack *head_a, t_stack *head_b, void*ptr)
+void	push_swap_error(char *message, t_stack *head_a, t_stack *head_b, void *ptr)
 {
 	ft_putstr_fd("push_swap: ", 2);
 	ft_putstr_fd(message, 2);
 	ft_putchar_fd('\n', 2);
-	if (head_a != NULL)
+	if (head_a)
 		push_swap_free_stack(head_a);
-	if (head_b != NULL)
+	if (head_b)
 		push_swap_free_stack(head_b);
+	if (ptr)
+		free(ptr);
 	if (errno)
 		exit (errno);
 	exit (EXIT_FAILURE);
