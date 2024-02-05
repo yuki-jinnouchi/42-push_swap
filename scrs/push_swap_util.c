@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/05 08:58:34 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/05 08:59:32 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	push_swap_print_stack(t_stack *head)
 		ft_putchar_fd(' ', 1);
 		temp = temp -> next;
 	}
+	ft_putchar_fd('\n', 1);
 }
