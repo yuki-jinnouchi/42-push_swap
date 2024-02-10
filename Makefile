@@ -1,19 +1,32 @@
+# $@: name of the target file (one before colon)
+# $<: name of first prerequisite file (first one after colon)
+# $^: names of all prerequisite files (space separated)
+# $*: stem (bit which matches the % wildcard in rule definition)
+#
+# VAR = val: Normal setting - values within are recursively expand when var used.
+# VAR := val: Setting of var with simple expansion of values inside - values are expanded at decl time.
+# VAR ?= val: Set var only if it doesn't have a value.
+# VAR += val: Append val to existing value (or set if var didn't exist).
+
 # Program name and output directory
-NAME = 					push_swap
 OUTPUT_DIR = 			.
+NAME = 					$(OUTPUT_DIR)/push_swap
 
 # Other directories
 SOURCES_DIR =			scrs
 INCLUDES_DIR =			incl
-LIBFT_DIR =				libft
-LIBFT_INCLUDES_DIR =	$(LIBFT_DIR)/incl
+OBJECTS_DIR :=			objs
 
 # Files
-HEADERS =				$(SOURCES_DIR)/pipex.h
-LIBFT =					$(LIBFT_DIR)/libft.a
-LIBFT_NAME =			ft.a
+HEADERS =				$(wildcard $(INCLUDES_DIR)/*.h)
 SOURCES =				$(wildcard $(SOURCES_DIR)/*.c)
-OBJECTS =				$(SOURCES:.c=.o)
+OBJECTS =				$(patsubst $(SOURCES_DIR)/%.c, $(OBJECTS_DIR)/%.o,$(SOURCES))
+
+#libraries
+LIBFT_DIR =				libft
+LIBFT_INCLUDES_DIR =	$(LIBFT_DIR)/incl
+LIBFT =					$(LIBFT_DIR)/libft.a
+LIBFT_LL_FLAGS +=		-lft
 
 # BONUS_SOURCES = \
 # 	$(wildcard $(BONUS_DIR)/*.c)
@@ -21,28 +34,37 @@ OBJECTS =				$(SOURCES:.c=.o)
 # BONUS_OBJECTS += 	$(OBJECTS)
 
 # Compiler and options
-CC = 					cc
-CFLAGS += 				-Wall -Wextra -Werror
-DEST = 					$(OUTPUT_DIR)
+CC = 			cc
+CFLAGS += 		-Wall -Wextra -Werror
+UI_FLAGS :=		-I $(INCLUDES_DIR) -I $(LIBFT_INCLUDES_DIR)
+UL_FLAGS := 	-L $(LIBFT_DIR)
+LL_FLAGS := 	$(LIBFT_LL_FLAGS)
+DEBUG_FLAGS :=	-fsanitize=address -fsanitize=undefined
 
-# Phony targets]
-.PHONY: all clean fclean re libft bonus aclean ac ar
+# Phony Targets
+.PHONY: all clean fclean re
+.PHONY: libft bonus
+.PHONY: aclean ac rec ar
 
-# Targets
+# Link Targets
 all: $(NAME)
-$(NAME): $(LIBFT) $(OBJECTS)
+$(NAME): $(OBJECTS) | libft
 	@echo "----------------"
 	@echo "make OBJECTS done.\n"
-	$(CC) $(CFLAGS) -L$(LIBFT_DIR) $^ -lft -o $@
+	$(CC) $(UI_FLAGS) $(UL_FLAGS) $^ $(LL_FLAGS) -o $@ $(DEBUG_FLAGS)
 	@echo "----------------"
 	@echo "make $(NAME) done.\n"
-	@echo "change permission of $(NAME)"
 	chmod 777 $(NAME)
 	@echo "----------------"
 	@echo "change permission of $(NAME) done.\n"
 
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(LIBFT_INCLUDES_DIR) -I $(INCLUDES_DIR) -c $< -o $@
+# Compile Targets
+$(OBJECTS_DIR)/%.o: $(SOURCES_DIR)/%.c | $(OBJECTS_DIR)
+	$(CC) $(W3_FLAGS) $(UI_FLAGS) -c $< -o $@ $(DEBUG_FLAGS)
+$(OBJECTS_DIR):
+	mkdir $(OBJECTS_DIR)
+
+# Clean Targets
 clean:
 	rm -f $(OBJECTS)
 	make -C libft clean
@@ -52,8 +74,12 @@ fclean: clean
 re: fclean all
 
 # libft
+libft: $(LIBFT)
 $(LIBFT):
+	@echo "Compiling libft library..."
 	make -C $(LIBFT_DIR)
+	@echo "--------------------------------"
+	@echo "make libft done.\n"
 
 # # bonus
 # bonus: all $(BONUS_OBJECTS)
@@ -62,5 +88,6 @@ $(LIBFT):
 # non mandatory
 aclean: all clean
 ac: all clean
+rec: re clean
 ar:
 	ar rcs $(OUTPUT_DIR)/$(NAME) $(OBJECTS)
