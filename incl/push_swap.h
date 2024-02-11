@@ -6,12 +6,18 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:55:11 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/05 08:52:22 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/11 02:19:47 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+# define SUCCESS 0
+# define FAILURE -1
+
+# define TRUE 1
+# define FALSE 0
 
 # include <stdio.h> // size_t, NULL, printf, perror
 # include <unistd.h>
@@ -31,10 +37,10 @@ typedef struct s_stack
 
 // main
 void	push_swap_exec(t_stack *head_a, t_stack *head_b);
-int 	main(int argc, char *argv[]);
+int		main(int argc, char *argv[]);
 
 // init
-t_stack	*push_swap_new_stack();
+t_stack	*push_swap_new_stack(void);
 t_stack	*push_swap_add_stack(t_stack *ptr, int n);
 void	push_swap_init(t_stack *head_a, int argc, char *argv[]);
 
@@ -53,6 +59,7 @@ void	push_swap_print_stack(t_stack *head);
 
 // error handling
 void	push_swap_free_stack(t_stack *head);
-void	push_swap_error(char *message, t_stack *head_a, t_stack *head_b, void*ptr);
+void	push_swap_error(char *message, t_stack *head_a, \
+			t_stack *head_b, void*ptr);
 
 #endif

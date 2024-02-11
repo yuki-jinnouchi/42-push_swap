@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/05 08:54:35 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/11 02:19:07 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ typedef struct s_tack
 }	t_stack;
 */
 
-t_stack	*push_swap_new_stack()
+t_stack	*push_swap_new_stack(void)
 {
 	t_stack	*ptr;
 
 	ptr = (t_stack *) malloc(sizeof(t_stack) + 1);
 	if (!ptr)
 		return (NULL);
-	ptr -> number = 0;
-	ptr -> order = 0;
-	ptr -> next = ptr;
-	ptr -> prev = ptr;
+	ptr->number = 0;
+	ptr->order = 0;
+	ptr->next = ptr;
+	ptr->prev = ptr;
 	return (ptr);
 }
 
@@ -43,7 +43,7 @@ t_stack	*push_swap_add_stack(t_stack *head, int n)
 	new = push_swap_new_stack();
 	if (new == NULL)
 		push_swap_error("init error", head, NULL, new);
-	new -> number = n;
+	new->number = n;
 	push_swap_push(head, new);
 	return (new);
 }
@@ -63,7 +63,7 @@ void	push_swap_init(t_stack *head_a, int argc, char *argv[])
 		temp = push_swap_add_stack(head_a, n);
 		if (temp == NULL)
 			push_swap_error("init malloc error", head_a, NULL, NULL);
-		// ft_putnbr_fd(temp -> number, 1);
+		// ft_putnbr_fd(temp->number, 1);
 		// ft_putstr_fd("\n", 1);
 		i++;
 	}
