@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 04:03:01 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/11 02:19:17 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/11 03:17:18 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	push_swap_swaps(t_stack *head_a, t_stack *head_b, int i)
 	if (i == 0 || i == 2)
 	{
 		temp = push_swap_pop(head_a);
-		push_swap_push(head_a->prev, temp);
+		push_swap_push(head_a -> next, temp);
 	}
 	if (i == 1 || i == 2)
 	{
 		temp = push_swap_pop(head_b);
-		push_swap_push(head_b->prev, temp);
+		push_swap_push(head_b -> next, temp);
 	}
 	if (i == 0)
 		ft_putstr_fd("sa\n", 1);
@@ -76,12 +76,12 @@ void	push_swap_rotates(t_stack *head_a, t_stack *head_b, int i)
 	if (i == 0 || i == 2)
 	{
 		temp = push_swap_pop(head_a);
-		push_swap_push(head_a->next, temp);
+		push_swap_push(head_a -> prev, temp);
 	}
 	if (i == 1 || i == 2)
 	{
 		temp = push_swap_pop(head_b);
-		push_swap_push(head_b->next, temp);
+		push_swap_push(head_b -> prev, temp);
 	}
 	if (i == 0)
 		ft_putstr_fd("ra\n", 1);
@@ -103,12 +103,12 @@ void	push_swap_reverse_rotates(t_stack *head_a, t_stack *head_b, int i)
 
 	if (i == 0 || i == 2)
 	{
-		temp = push_swap_pop(head_a->next);
+		temp = push_swap_pop(head_a -> prev -> prev);
 		push_swap_push(head_a, temp);
 	}
 	if (i == 0 || i == 2)
 	{
-		temp = push_swap_pop(head_b->next);
+		temp = push_swap_pop(head_b -> prev -> prev);
 		push_swap_push(head_b, temp);
 	}
 	if (i == 0)
