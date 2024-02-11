@@ -6,13 +6,13 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/05 08:18:59 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/11 01:52:42 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stack	*head_a;
 	t_stack	*head_b;
@@ -28,5 +28,5 @@ int main(int argc, char **argv)
 	push_swap_print_stack(head_a);
 	push_swap_free_stack(head_a);
 	push_swap_free_stack(head_b);
-    return (0);
+	return (0);
 }
