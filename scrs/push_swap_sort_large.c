@@ -6,15 +6,16 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/11 05:53:27 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:39:17 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// void	push_swap_exec(t_stack *head_a, t_stack *head_b)
-// {
+void	push_swap_quicksort(t_vars *vars)
+{
 
 
 
-// }
+
+}

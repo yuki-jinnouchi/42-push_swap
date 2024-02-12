@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 04:03:01 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/11 03:17:18 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/11 07:33:32 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	push_swap_swaps(t_stack *head_a, t_stack *head_b, int i)
 	if (i == 2)
 		ft_putstr_fd("ss\n", 1);
 }
+
+
 
 /*ra (rotate a): Shift up all elements of stack a by 1.
 The first element becomes the last one.*/

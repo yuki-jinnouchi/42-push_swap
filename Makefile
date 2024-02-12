@@ -23,7 +23,7 @@ SOURCES =				$(wildcard $(SOURCES_DIR)/*.c)
 OBJECTS =				$(patsubst $(SOURCES_DIR)/%.c, $(OBJECTS_DIR)/%.o,$(SOURCES))
 
 #libraries
-LIBFT_DIR =				libft
+LIBFT_DIR =				libs/libft
 LIBFT_INCLUDES_DIR =	$(LIBFT_DIR)/incl
 LIBFT =					$(LIBFT_DIR)/libft.a
 LIBFT_LL_FLAGS +=		-lft

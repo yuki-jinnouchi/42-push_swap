@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/11 06:00:54 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:38:35 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ void	push_swap_print_stack(t_stack *head)
 int	push_swap_is_sorted(t_stack *head)
 {
 	t_stack	*ptr;
-	int		number;
 
 	ptr = head->next;
-	number = ptr->number;
-	while (ptr->next->number != 0)
+	while (ptr->next != head)
 	{
-		if (number > ptr->next->number)
+		if (ptr->number >= ptr->next->number)
 			return (FALSE);
 		ptr = ptr->next;
 	}
@@ -62,4 +60,21 @@ int	push_swap_is_empty(t_stack *head)
 	if (head->next == head)
 		return (TRUE);
 	return (FALSE);
+}
+
+/*valid not 0 and non duplicated*/
+int	push_swap_valid_input(t_stack *head, int n)
+{
+	t_stack *temp;
+
+	if (n == 0)
+		return(FALSE);
+	temp = head->next;
+	while (temp != head)
+	{
+		if (temp->number == n)
+			return (FALSE);
+		temp = temp->next;
+	}
+	return (TRUE);
 }
