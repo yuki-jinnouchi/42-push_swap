@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/11 05:59:41 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:39:27 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int	main(int argc, char **argv)
 {
-	t_stack	*head_a;
-	t_stack	*head_b;
+	t_vars	*vars;
 
 	if (argc < 1)
-		push_swap_error("argument must be more than 2", NULL, NULL, NULL);
+		push_swap_error("argument must be more than 2", NULL);
 	if (argc == 1)
 		return (0);
-	head_a = push_swap_new_element();
-	push_swap_init(head_a, argc, argv);
-	head_b = push_swap_new_element();
-	push_swap_exec(head_a, head_b);
-	push_swap_print_stack(head_a);
-	push_swap_free_stack(head_a);
-	push_swap_free_stack(head_b);
+	vars = malloc(sizeof(t_vars));
+	if (vars == NULL)
+		push_swap_error("vars malloc error", vars);
+	push_swap_init(argc, argv, vars);
+	// push_swap_exec(vars);
+	push_swap_print_stack(vars->head_a);
+	push_swap_free_stack(vars->head_a);
+	push_swap_free_stack(vars->head_b);
+	free(vars);
 	return (0);
 }

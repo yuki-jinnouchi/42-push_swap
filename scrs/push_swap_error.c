@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:20 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/11 02:53:44 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:41:45 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,32 @@
 void	push_swap_free_stack(t_stack *head)
 {
 	t_stack	*next;
-	t_stack	*delete;
+	t_stack	*temp;
 
-	delete = head -> next;
-	while (delete != head)
+	temp = head -> next;
+	while (temp != head)
 	{
-		next = delete -> next;
-		free(delete);
-		delete = next;
+		next = temp -> next;
+		free(temp);
+		temp = next;
 	}
-	free(delete);
+	free(temp);
 	return ;
 }
 
-void	push_swap_error(char *message, t_stack *head_a, \
-			t_stack *head_b, void *ptr)
+void	push_swap_error(char *message, t_vars *vars)
 {
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(message, 2);
 	ft_putchar_fd('\n', 2);
-	if (head_a)
-		push_swap_free_stack(head_a);
-	if (head_b)
-		push_swap_free_stack(head_b);
-	if (ptr)
-		free(ptr);
+	if (vars->head_a)
+		push_swap_free_stack(vars->head_a);
+	if (vars->head_a)
+		push_swap_free_stack(vars->head_a);
+	if (vars)
+		free(vars);
+	// if (ptr)
+	// 	free(ptr);
 	if (errno)
 		exit (errno);
 	exit (EXIT_FAILURE);
