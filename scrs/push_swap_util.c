@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/12 15:38:35 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:01:11 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ void	push_swap_print_stack(t_stack *head)
 	while (temp != head)
 	{
 		ft_putnbr_fd(temp->number, 1);
+		ft_putchar_fd(' ', 1);
+		temp = temp->next;
+	}
+	ft_putchar_fd('\n', 1);
+}
+
+void	push_swap_print_stack_order(t_stack *head)
+{
+	t_stack	*temp;
+
+	temp = head->next;
+	while (temp != head)
+	{
+		ft_putnbr_fd(temp->order, 1);
 		ft_putchar_fd(' ', 1);
 		temp = temp->next;
 	}

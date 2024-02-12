@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/12 15:37:00 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 23:03:21 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,21 @@ t_stack	*push_swap_add_element(t_stack *head, int number)
 	return (new);
 }
 
+void	push_swap_vars_init(t_vars *vars)
+{
+	vars->head_a->name = 'a';
+	vars->head_b->name = 'b';
+	vars->head_a->opposite = vars->head_b;
+	vars->head_b->opposite = vars->head_a;
+	vars->arg_size = push_swap_count_stack(vars->head_a);
+	vars->pivot = NULL;
+	vars->fixed = NULL;
+	vars->min = 1;
+	vars->max = vars->arg_size;
+	vars->median = (vars->arg_size) / 2;
+}
+
+
 void	push_swap_init(int argc, char *argv[], t_vars *vars)
 {
 	int	arg_count;
@@ -58,8 +73,6 @@ void	push_swap_init(int argc, char *argv[], t_vars *vars)
 	vars->head_b = push_swap_new_element();
 	if (vars->head_a == NULL || vars->head_b == NULL)
 		push_swap_error("head malloc error", vars);
-	vars->head_a->name = 'a';
-	vars->head_b->name = 'b';
 	arg_count = argc - 1;
 	while (arg_count > 0)
 	{
@@ -70,5 +83,6 @@ void	push_swap_init(int argc, char *argv[], t_vars *vars)
 			push_swap_error("elem malloc error", vars);
 		arg_count--;
 	}
+	push_swap_vars_init(vars);
 	return ;
 }

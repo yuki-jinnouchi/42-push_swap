@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/11 05:39:51 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:24:32 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ t_stack	*push_swap_copy_sort(t_stack *head)
 	if (copy_head == NULL)
 		return (NULL);
 	temp = copy_head->next;
-	while (push_swap_is_sorted(copy_head)!= FALSE)
+	while (push_swap_is_sorted(copy_head) == FALSE)
+	{
 		temp = copy_head->next;
 		while (temp->next != copy_head)
 		{
@@ -77,6 +78,7 @@ t_stack	*push_swap_copy_sort(t_stack *head)
 			else
 				temp = temp->next;
 		}
+	}
 	return (copy_head);
 }
 

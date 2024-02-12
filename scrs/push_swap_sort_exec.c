@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/12 15:38:04 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 22:03:04 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	push_swap_exec(t_vars *vars)
 
 	if (push_swap_add_index(vars->head_a) == FAILURE)
 		push_swap_error("index error", vars);
+    push_swap_print_stack_order(vars->head_a);
     push_swap_quicksort(vars);
 }

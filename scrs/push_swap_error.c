@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:20 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/12 15:41:45 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/12 21:06:51 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,29 @@ void	push_swap_free_stack(t_stack *head)
 	t_stack	*next;
 	t_stack	*temp;
 
-	temp = head -> next;
+	temp = head->next;
 	while (temp != head)
 	{
-		next = temp -> next;
+		next = temp->next;
 		free(temp);
 		temp = next;
 	}
 	free(temp);
+	return ;
+}
+
+void	push_swap_free_medians(t_location *head)
+{
+	t_location	*next;
+	t_location	*temp;
+
+	temp = head;
+	while (temp != NULL)
+	{
+		temp = temp->next;
+		free(temp);
+	}
+	head = NULL;
 	return ;
 }
 
@@ -37,6 +52,8 @@ void	push_swap_error(char *message, t_vars *vars)
 		push_swap_free_stack(vars->head_a);
 	if (vars->head_a)
 		push_swap_free_stack(vars->head_a);
+	if (vars->pivot != NULL)
+		push_swap_free_medians(vars->pivot);
 	if (vars)
 		free(vars);
 	// if (ptr)
