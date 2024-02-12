@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:55:11 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/12 15:39:11 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 00:15:19 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ typedef struct s_stack
 	char			name;
 	struct s_stack	*next;
 	struct s_stack	*prev;
+	struct s_stack	*opposite;
 }	t_stack;
 
 typedef struct s_location
 {
-	struct s_stack		*ptr;
+	// struct s_stack		*ptr;
+	int					median;
 	int					min;
 	int					max;
 	struct s_location	*next;
@@ -54,10 +56,11 @@ typedef struct s_vars
 	int					arg_size;
 	int					search_size;
 	int					order_line;
-	int					begin;
-	int					end;
-	struct t_location	*fixed;
-	struct t_location	*median;
+	int					min;
+	int					max;
+	int 				median;
+	struct s_location	*pivot;
+	struct s_stack		*fixed;
 }	t_vars;
 
 // typedef struct s_nord
@@ -81,18 +84,24 @@ void	push_swap_init(int argc, char *argv[], t_vars *vars);
 t_stack	*push_swap_pop(t_stack *head);
 void	push_swap_push(t_stack *head, t_stack *new_top);
 
+int		push_swap_pop_loc(t_vars *vars);
+void	push_swap_push_loc(int median, t_vars *vars);
+
+
 // push_swap_operation.c
-void	push_swap_pushes(t_stack *head_a, t_stack *head_b, int i);
-void	push_swap_swaps(t_stack *head_a, t_stack *head_b, int i);
-void	push_swap_rotates(t_stack *head_a, t_stack *head_b, int i);
-void	push_swap_reverse_rotates(t_stack *head_a, t_stack *head_b, int i);
+void	push_swap_pushes(t_stack *head);
+void	push_swap_swaps(t_stack *head, int i);
+void	push_swap_rotates(t_stack *head, int i);
+void	push_swap_reverse_rotates(t_stack *head, int i);
 
 // push_swap_util.c
 int		push_swap_count_stack(t_stack *head);
 void	push_swap_print_stack(t_stack *head);
+void	push_swap_print_stack_order(t_stack *head);
 int		push_swap_is_sorted(t_stack *head);
 int		push_swap_is_empty(t_stack *head);
 int		push_swap_valid_input(t_stack *head, int n);
+
 
 // push_swap_sort_index.c
 t_stack	*push_swap_new_copy_element(t_stack *src, \
@@ -104,7 +113,11 @@ int	push_swap_add_index(t_stack *head);
 // push_swap_sort_exec.c
 void	push_swap_exec(t_vars *vars);
 
-
+void	push_swap_push_half(t_vars *vars);
+void	push_swap_small_sort_push_a(t_vars *vars);
+void	push_swap_small_sort_rotate_a(t_vars *vars);
+void	push_swap_push_back_half(t_vars *vars);
+void	push_swap_set_pivot(t_vars *vars);
 void	push_swap_quicksort(t_vars *vars);
 
 // push_swap_error.c
