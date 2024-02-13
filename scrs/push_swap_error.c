@@ -6,11 +6,15 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:20 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/12 21:06:51 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:33:05 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	push_swap_free_stack(t_stack *head);
+void	push_swap_free_medians(t_pivot *head);
+void	push_swap_error(char *message, t_vars *vars);
 
 void	push_swap_free_stack(t_stack *head)
 {
@@ -28,10 +32,10 @@ void	push_swap_free_stack(t_stack *head)
 	return ;
 }
 
-void	push_swap_free_medians(t_location *head)
+void	push_swap_free_medians(t_pivot *head)
 {
-	t_location	*next;
-	t_location	*temp;
+	t_pivot	*next;
+	t_pivot	*temp;
 
 	temp = head;
 	while (temp != NULL)

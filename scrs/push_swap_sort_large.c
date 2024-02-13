@@ -6,50 +6,35 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 18:11:01 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:43:55 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void print_stack(t_location	*ptr)
-{
-	t_location *temp;
-
-	temp = ptr;
-	while(temp != NULL)
-	{
-		printf("++ stack: min: %i, max: %i, med: %i\n", temp->min, temp->max, temp->median);
-		temp = temp->next;
-	}
-	printf("++ stack: NULL\n\n");
-}
-
-void print_status(t_vars *vars)
-{
-	printf("min: %i, max: %i, median:%i, piv:%p\n", vars->min, vars->max, vars->median, vars->pivot);
-	print_stack(vars->pivot);
-}
-
+void	push_swap_push_half(t_vars *vars);
+void	push_swap_back_half(t_vars *vars);
+void	push_swap_small_sort_push_a(t_vars *vars);
+void	push_swap_small_sort_rotate_a(t_vars *vars);
+void	push_swap_quicksort(t_vars *vars);
 
 void	push_swap_push_half(t_vars *vars)
 {
 	t_stack		*temp;
-	int 		size;
+	int			size;
 	int			count;
 
 	// ft_putstr_fd(" --- push_swap_push_half --- \n", 1);
 	if (vars->dir == 0)
-		push_swap_push_loc(vars->max, vars);
+		push_swap_push_loc(vars);
 	if (vars->dir == 1)
 		vars->max = push_swap_pop_loc(vars);
-	vars->median = (vars->min + vars->max) / 2;
-	temp = vars->head_a->prev;
+	vars->avg = (vars->min + vars->max) / 2;
 	size = vars->max - vars->min + 1;
 	count = 0;
-	while(count < size)
+	while (count < size)
 	{
-		if (vars->head_a->next->order <= vars->median)
+		if (vars->head_a->next->order <= vars->avg)
 			push_swap_pushes(vars->head_b);
 		else
 			push_swap_rotates(vars->head_a, 0);
@@ -57,26 +42,26 @@ void	push_swap_push_half(t_vars *vars)
 	}
 	if (vars->min != 1)
 	{
-		size = vars-> max - vars->median;
+		size = vars-> max - vars->avg;
 		count = 0;
-		while(count++ < size)
+		while (count++ < size)
 			push_swap_reverse_rotates(vars->head_a, 0);
 	}
 	vars->dir = 0;
 }
 
-void	push_swap_push_back_half(t_vars *vars)
+void	push_swap_back_half(t_vars *vars)
 {
 	int			count;
 
-	// ft_putstr_fd(" --- push_swap_push_back_half --- \n", 1);
-	vars->max = vars->median;
-	push_swap_push_loc(vars->max, vars);
-	vars->median = (vars->min + vars->max) / 2;
+	// ft_putstr_fd(" --- push_swap_back_half --- \n", 1);
+	vars->max = vars->avg;
+	push_swap_push_loc(vars);
+	vars->avg = (vars->min + vars->max) / 2;
 	count = 0;
-	while(count < vars->max - vars->min + 1)
+	while (count < vars->max - vars->min + 1)
 	{
-		if (vars->head_b->next->order > vars->median)
+		if (vars->head_b->next->order > vars->avg)
 			push_swap_pushes(vars->head_a);
 		else
 			push_swap_rotates(vars->head_b, 0);
@@ -87,11 +72,11 @@ void	push_swap_push_back_half(t_vars *vars)
 
 void	push_swap_small_sort_push_a(t_vars *vars)
 {
-	int size;
+	int	size;
 
 	// ft_putstr_fd(" --- push_swap_small_sort_push_a --- \n", 1);
-	vars->max = vars->median;
-	vars->median = (vars->min + vars->max) / 2;
+	vars->max = vars->avg;
+	vars->avg = (vars->min + vars->max) / 2;
 	size = push_swap_count_stack(vars->head_b);
 	if (size > 1)
 	{
@@ -110,7 +95,7 @@ void	push_swap_small_sort_push_a(t_vars *vars)
 
 void	push_swap_small_sort_rotate_a(t_vars *vars)
 {
-	int size;
+	int	size;
 
 	// ft_putstr_fd(" --- push_swap_small_sort_rotate_a --- \n", 1);
 	size = vars->max - vars->min + 1;
@@ -142,7 +127,7 @@ void	push_swap_quicksort(t_vars *vars)
 				push_swap_small_sort_rotate_a(vars);
 		}
 		else
-			push_swap_push_back_half(vars);
+			push_swap_back_half(vars);
 		// print_status(vars);
 	}
 }
