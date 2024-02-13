@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 16:23:10 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:39:37 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,27 @@ void	push_swap_push(t_stack *head, t_stack *new_top)
 
 int	push_swap_pop_loc(t_vars *vars)
 {
-	t_location	*top;
-	t_location	*new_top;
-	int			max;
+	t_pivot	*top;
+	t_pivot	*new_top;
+	int		max;
 
 	top = vars->pivot;
 	if (top == NULL)
 		return (vars->arg_size);
 	new_top = vars->pivot->next;
 	vars->pivot = new_top;
-	max = top->median;
+	max = top->max;
 	free(top);
 	return (max);
 }
 
-void	push_swap_push_loc(int median, t_vars *vars)
+void	push_swap_push_loc(t_vars *vars)
 {
-	t_location	*top;
+	t_pivot	*top;
 
-	top = malloc(sizeof(t_location));
+	top = malloc(sizeof(t_pivot));
 	if (top == NULL)
 		push_swap_error("location alloc error", vars);
-	// top->ptr = new_top;
-	top->median = median;
-	top->min = vars->min;
 	top->max = vars->max;
 	top->next = vars->pivot;
 	vars->pivot = top;

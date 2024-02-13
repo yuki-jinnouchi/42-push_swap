@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 18:00:52 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:38:13 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,17 @@ t_stack	*push_swap_add_element(t_stack *head, int number)
 
 void	push_swap_vars_init(t_vars *vars)
 {
-	int arg_count;
+	int	arg_count;
 
 	arg_count = 0;
 	if (arg_count == 1)
 	{
 		arg_count = 0;
-		while(vars->arg_temp[arg_count] != NULL)
+		while (vars->arg_temp[arg_count] != NULL)
 			free(vars->arg_temp[arg_count]++);
 		free(vars->arg_temp);
 		vars->arg_temp = NULL;
 	}
-
 	vars->head_a->name = 'a';
 	vars->head_b->name = 'b';
 	vars->head_a->opposite = vars->head_b;
@@ -73,7 +72,7 @@ void	push_swap_vars_init(t_vars *vars)
 	// vars->fixed = NULL;
 	vars->min = 1;
 	vars->max = vars->arg_size;
-	vars->median = (vars->arg_size) / 2;
+	vars->avg = (vars->arg_size) / 2;
 }
 
 void	push_swap_init(int argc, char **argv, t_vars *vars)
@@ -89,7 +88,6 @@ void	push_swap_init(int argc, char **argv, t_vars *vars)
 		vars->arg_temp = ft_split(argv[1], ' ');
 	else
 		vars->arg_temp = argv + 1;
-
 	arg_count = 0;
 	while (vars->arg_temp[arg_count] != NULL)
 	{

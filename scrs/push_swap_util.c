@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 08:50:03 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:44:23 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int	push_swap_is_empty(t_stack *head)
 /*valid not 0 and non duplicated*/
 int	push_swap_valid_input(t_stack *head, int n)
 {
-	t_stack *temp;
+	t_stack	*temp;
 
 	if (n == 0)
-		return(FALSE);
+		return (FALSE);
 	temp = head->next;
 	while (temp != head)
 	{
