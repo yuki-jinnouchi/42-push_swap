@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 04:03:01 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 00:35:20 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 07:54:23 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,4 @@ void	push_swap_reverse_rotates(t_stack *head, int i)
 	if (i == 1)
 		ft_putchar_fd('r', 1);
 	ft_putstr_fd("\n", 1);
-	sleep(1);
 }

@@ -67,10 +67,10 @@ $(OBJECTS_DIR):
 # Clean Targets
 clean:
 	rm -f $(OBJECTS)
-	make -C libft clean
+	make -C $(LIBFT_DIR) clean
 fclean: clean
 	rm -f $(OUTPUT_DIR)/$(NAME)
-	make -C libft fclean
+	make fclean -C $(LIBFT_DIR)
 re: fclean all
 
 # libft
