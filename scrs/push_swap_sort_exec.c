@@ -6,11 +6,13 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 20:42:20 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:04:07 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	push_swap_exec(t_vars *vars);
 
 void	push_swap_exec(t_vars *vars)
 {

@@ -6,14 +6,14 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 20:35:40 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 20:50:55 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 t_stack	*push_swap_new_copy_element(t_stack *src, \
-			t_stack *copy_head, t_stack *copy_prev);
+	t_stack *copy_head, t_stack *copy_prev);
 t_stack	*push_swap_copy_stack(t_stack *head);
 t_stack	*push_swap_copy_sort(t_stack *head);
 int		push_swap_add_index(t_stack *head);

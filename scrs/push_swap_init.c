@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 20:38:13 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:01:34 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ typedef struct s_tack
 	struct s_tack	*prev;
 }	t_stack;
 */
+
+t_stack	*push_swap_new_element(void);
+t_stack	*push_swap_add_element(t_stack *head, int number);
+void	push_swap_vars_init(t_vars *vars);
+void	push_swap_init(int argc, char **argv, t_vars *vars);
 
 t_stack	*push_swap_new_element(void)
 {
