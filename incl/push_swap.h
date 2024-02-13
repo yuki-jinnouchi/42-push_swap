@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:55:11 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 08:20:47 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:24:27 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_vars
 	struct s_stack		*head_b;
 	// int					fixed;
 	int					arg_size;
+	int					dir;
 	int					search_size;
 	int					order_line;
 	int					min;

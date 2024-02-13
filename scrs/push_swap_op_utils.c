@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/12 23:30:51 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:23:10 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	push_swap_pop_loc(t_vars *vars)
 
 	top = vars->pivot;
 	if (top == NULL)
-		return (0);
+		return (vars->arg_size);
 	new_top = vars->pivot->next;
 	vars->pivot = new_top;
 	max = top->median;
