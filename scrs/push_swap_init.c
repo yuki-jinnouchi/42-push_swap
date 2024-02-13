@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/12 23:03:21 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 09:09:46 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,37 @@ t_stack	*push_swap_add_element(t_stack *head, int number)
 	if (new == NULL)
 		return (NULL);
 	new->number = number;
-	push_swap_push(head, new);
+	push_swap_push(head->prev, new);
 	return (new);
 }
 
 void	push_swap_vars_init(t_vars *vars)
 {
+	int arg_count;
+
+	arg_count = 0;
+	if (arg_count == 1)
+	{
+		arg_count = 0;
+		while(vars->arg_temp[arg_count] != NULL)
+			free(vars->arg_temp[arg_count]++);
+		free(vars->arg_temp);
+		vars->arg_temp = NULL;
+	}
+
 	vars->head_a->name = 'a';
 	vars->head_b->name = 'b';
 	vars->head_a->opposite = vars->head_b;
 	vars->head_b->opposite = vars->head_a;
 	vars->arg_size = push_swap_count_stack(vars->head_a);
 	vars->pivot = NULL;
-	vars->fixed = NULL;
+	// vars->fixed = NULL;
 	vars->min = 1;
 	vars->max = vars->arg_size;
 	vars->median = (vars->arg_size) / 2;
 }
 
-
-void	push_swap_init(int argc, char *argv[], t_vars *vars)
+void	push_swap_init(int argc, char **argv, t_vars *vars)
 {
 	int	arg_count;
 	int	number;
@@ -73,15 +84,19 @@ void	push_swap_init(int argc, char *argv[], t_vars *vars)
 	vars->head_b = push_swap_new_element();
 	if (vars->head_a == NULL || vars->head_b == NULL)
 		push_swap_error("head malloc error", vars);
-	arg_count = argc - 1;
-	while (arg_count > 0)
+	if (argc == 2)
+		vars->arg_temp = ft_split(argv[1], ' ');
+	else
+		vars->arg_temp = argv + 1;
+	arg_count = 0;
+	while (vars->arg_temp[arg_count] != NULL)
 	{
-		number = ft_atoi(argv[arg_count]);
+		number = ft_atoi(vars->arg_temp[arg_count]);
 		if (push_swap_valid_input(vars->head_a, number) == FALSE)
 			push_swap_error("input valid error", vars);
 		if (push_swap_add_element(vars->head_a, number) == NULL)
 			push_swap_error("elem malloc error", vars);
-		arg_count--;
+		arg_count++;
 	}
 	push_swap_vars_init(vars);
 	return ;

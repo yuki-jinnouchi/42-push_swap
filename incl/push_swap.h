@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:55:11 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 00:15:19 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 08:20:47 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_location
 
 typedef struct s_vars
 {
+	char				**arg_temp;
 	struct s_stack		*head_a;
 	struct s_stack		*head_b;
 	// int					fixed;
@@ -60,7 +61,7 @@ typedef struct s_vars
 	int					max;
 	int 				median;
 	struct s_location	*pivot;
-	struct s_stack		*fixed;
+	// struct s_stack		*fixed;
 }	t_vars;
 
 // typedef struct s_nord
