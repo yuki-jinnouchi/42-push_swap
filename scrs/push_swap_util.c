@@ -6,11 +6,18 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 20:44:23 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:04:54 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int		push_swap_count_stack(t_stack *head);
+void	push_swap_print_stack(t_stack *head);
+void	push_swap_print_stack_order(t_stack *head);
+int		push_swap_is_sorted(t_stack *head);
+int		push_swap_is_empty(t_stack *head);
+int		push_swap_valid_input(t_stack *head, int n);
 
 int	push_swap_count_stack(t_stack *head)
 {

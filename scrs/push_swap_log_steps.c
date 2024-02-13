@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 20:38:56 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:02:10 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ typedef struct s_step
 	struct s_step	*prev;
 }	t_step;
 */
+
+int		push_swap_2stack_compare_wrap(t_stack head_i, t_stack head_j);
+int		push_swap_stack_compare(t_stack head_i, t_stack head_j);
+void	push_swap_add_step(t_step *add, t_vars vars);
+void	push_swap_log_steps(t_vars *vars, char *command, int int_command);
 
 int	push_swap_2stack_compare_wrap(t_stack head_i, t_stack head_j)
 {

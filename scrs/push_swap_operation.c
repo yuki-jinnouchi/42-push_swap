@@ -6,11 +6,16 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 04:03:01 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 20:39:56 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:03:33 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	push_swap_pushes(t_stack *head);
+void	push_swap_swaps(t_stack *head, int i);
+void	push_swap_rotates(t_stack *head, int i);
+void	push_swap_reverse_rotates(t_stack *head, int i);
 
 /*pa (push a): Take the first element at the top of b
 and put it at the top of a. Do nothing if b is empty.*/
