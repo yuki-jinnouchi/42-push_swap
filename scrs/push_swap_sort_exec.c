@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 21:04:07 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 07:22:13 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	push_swap_exec(t_vars *vars)
 	// push_swap_print_stack_order(vars->head_a);
 	// printf("\n");
 	push_swap_quicksort(vars);
+	push_swap_print_step(vars->head_step, vars);
 }

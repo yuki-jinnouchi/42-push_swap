@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 21:02:10 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:01:22 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,60 +23,65 @@ typedef struct s_step
 }	t_step;
 */
 
-int		push_swap_2stack_compare_wrap(t_stack head_i, t_stack head_j);
-int		push_swap_stack_compare(t_stack head_i, t_stack head_j);
-void	push_swap_add_step(t_step *add, t_vars vars);
-void	push_swap_log_steps(t_vars *vars, char *command, int int_command);
+void	push_swap_free_step(t_step *head);
+void	push_swap_add_step(t_step *new_step, t_vars *vars);
+void	push_swap_log_steps(int int_command, char *command, t_vars *vars);
 
-int	push_swap_2stack_compare_wrap(t_stack head_i, t_stack head_j)
+void	push_swap_free_step(t_step *head)
 {
-	if (push_swap_stack_compare(head_i, head_j) == FALSE)
-		return (FALSE);
-	if (push_swap_stack_compare(head_i->opposite, head_j->opposite) == FALSE)
-		return (FALSE);
-	return (TRUE);
-}
+	t_step	*temp;
+	t_step	*prev;
 
-int	push_swap_stack_compare(t_stack head_i, t_stack head_j)
-{
-	t_stack	temp_i;
-	t_stack	temp_j;
-
-	temp_i = head_i;
-	temp_j = head_j;
-	while (temp_i != head_i)
+	temp = head->next;
+	while (temp!= head)
 	{
-		if (temp_i->number != temp_j->number)
-			return (FALSE);
-		temp_i = temp_i->next;
-		temp_j = temp_j->next;
+		if (temp->copy_head_a->opposite != NULL)
+			push_swap_free_stack(temp->copy_head_a->opposite);
+		push_swap_free_stack(temp->copy_head_a);
+		free(temp->command);
+		prev = temp;
+		temp = temp->next;
+		free(prev);
 	}
-	if (temp_j != head_j)
-		return (FALSE);
-	return (SUCCESS);
+	// if (temp->copy_head_a->opposite != NULL)
+	// 	push_swap_free_stack(temp->copy_head_a->opposite);
+	push_swap_free_stack(temp->copy_head_a);
+	free(temp->command);
+	free(temp);
+	return ;
 }
 
-void	push_swap_add_step(t_step *add, t_vars vars)
+void	push_swap_add_step(t_step *new_step, t_vars *vars)
 {
 	t_step	*last;
 
+	if (vars->head_step == NULL)
+	{
+		vars->head_step = new_step;
+		vars->head_step->next = new_step;
+		vars->head_step->prev = new_step;
+		return ;
+	}
 	last = vars->head_step->prev;
-	vars->head_step->prev = add;
-	last->next = add;
-	add->prev = last;
-	add->next = vars->head_step;
+	vars->head_step->prev = new_step;
+	last->next = new_step;
+	new_step->prev = last;
+	new_step->next = vars->head_step;
+	return ;
 }
 
-void	push_swap_log_steps(t_vars *vars, char *command, int int_command)
+void	push_swap_log_steps(int int_command, char *command, t_vars *vars)
 {
 	t_step	*temp;
 
-	temp = malloc(sizeof(steps));
+	temp = malloc(sizeof(t_step));
 	if (temp == NULL)
 		return ;
-	temp->command = command;
+	temp->command = ft_strdup(command);
 	temp->int_command = int_command;
 	temp->copy_head_a = push_swap_copy_stack(vars->head_a);
 	temp->copy_head_a->opposite = push_swap_copy_stack(vars->head_b);
+	temp->copy_head_a->opposite->opposite = temp->copy_head_a;
 	push_swap_add_step(temp, vars);
+	return ;
 }

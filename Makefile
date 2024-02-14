@@ -39,7 +39,7 @@ CFLAGS += 		-Wall -Wextra -Werror
 UI_FLAGS :=		-I $(INCLUDES_DIR) -I $(LIBFT_INCLUDES_DIR)
 UL_FLAGS := 	-L $(LIBFT_DIR)
 LL_FLAGS := 	$(LIBFT_LL_FLAGS)
-DEBUG_FLAGS :=	-fsanitize=address -fsanitize=undefined
+DEBUG_FLAGS :=	-fsanitize=address,undefined
 
 # Phony Targets
 .PHONY: all clean fclean re
