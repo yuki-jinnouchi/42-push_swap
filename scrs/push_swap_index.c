@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 20:50:55 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:09:52 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_stack	*push_swap_new_copy_element(t_stack *src, \
 	if (!ptr)
 		return (NULL);
 	ptr->number = src->number;
-	ptr->order = 0;
+	ptr->order = src->order;
 	ptr->next = copy_head;
 	ptr->prev = copy_prev;
 	ptr->prev->next = ptr;
@@ -44,6 +44,9 @@ t_stack	*push_swap_copy_stack(t_stack *head)
 	copy_head = (t_stack *) malloc(sizeof(t_stack));
 	if (!copy_head)
 		return (NULL);
+	copy_head->name = head->name;
+	copy_head->prev = copy_head;
+	copy_head->next = copy_head;
 	copy_prev = copy_head;
 	src = head-> next;
 	while (src != head)

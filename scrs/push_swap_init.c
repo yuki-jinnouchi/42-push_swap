@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 21:01:34 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/13 21:46:54 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ void	push_swap_vars_init(t_vars *vars)
 	vars->head_b->opposite = vars->head_a;
 	vars->arg_size = push_swap_count_stack(vars->head_a);
 	vars->pivot = NULL;
-	vars->dir = 0;
-	// vars->fixed = NULL;
 	vars->min = 1;
 	vars->max = vars->arg_size;
-	vars->avg = (vars->arg_size) / 2;
+	vars->avg = (vars->max + vars->min) / 2;
+	vars->dir = 0;
+	vars->head_step = NULL;
 }
 
 void	push_swap_init(int argc, char **argv, t_vars *vars)
