@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:55:11 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/15 16:33:01 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:59:19 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_vars
 }	t_vars;
 
 // push_swap_main.c
+void	push_swap_exec(t_vars *vars);
 int		main(int argc, char *argv[]);
 
 // push_swap_init.c
@@ -99,9 +100,6 @@ int		push_swap_is_empty(t_stack *head);
 int		push_swap_valid_input(t_stack *head, int n);
 int		push_swap_2stack_compare_wrap(t_stack *head_i, t_stack *head_j);
 int		push_swap_stack_compare(t_stack *head_i, t_stack *head_j);
-
-// push_swap_sort_exec.c
-void	push_swap_exec(t_vars *vars);
 
 // push_swap_sort_index.c
 t_stack	*push_swap_new_copy_element(t_stack *src, \
