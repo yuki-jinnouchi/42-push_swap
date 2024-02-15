@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/15 16:11:57 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:34:30 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	push_swap_free_step(t_step *head)
 	push_swap_free_stack(temp->copy_head_a);
 	free(temp->command);
 	free(temp);
+	head = NULL;
 	return ;
 }
 

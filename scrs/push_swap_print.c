@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/15 15:55:35 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:33:41 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	push_swap_print_step(t_step *head, t_vars *vars)
 		temp = temp->next;
 	}
 	push_swap_free_step(head);
+	vars->head_step = NULL;
 	return ;
 }
 
