@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/13 21:50:29 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:55:35 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	push_swap_pop_pivot(t_vars *vars)
 	t_pivot	*new_top;
 	int		max;
 
-	top = vars->pivot;
+	top = vars->head_pivot;
 	if (top == NULL)
 		return (vars->arg_size);
-	new_top = vars->pivot->next;
-	vars->pivot = new_top;
+	new_top = vars->head_pivot->next;
+	vars->head_pivot = new_top;
 	max = top->max;
 	free(top);
 	return (max);
@@ -77,7 +77,7 @@ void	push_swap_push_pivot(t_vars *vars)
 	if (top == NULL)
 		push_swap_error("location alloc error", vars);
 	top->max = vars->max;
-	top->next = vars->pivot;
-	vars->pivot = top;
+	top->next = vars->head_pivot;
+	vars->head_pivot = top;
 	return ;
 }
