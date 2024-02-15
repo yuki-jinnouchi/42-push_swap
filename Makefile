@@ -49,13 +49,13 @@ DEBUG_FLAGS :=	-fsanitize=address,undefined
 # Link Targets
 all: $(NAME)
 $(NAME): $(OBJECTS) | libft
-	@echo "----------------"
+	@echo "--------------------------------"
 	@echo "make OBJECTS done.\n"
 	$(CC) $(UI_FLAGS) $(UL_FLAGS) $^ $(LL_FLAGS) -o $@ $(DEBUG_FLAGS)
-	@echo "----------------"
+	@echo "--------------------------------"
 	@echo "make $(NAME) done.\n"
 	chmod 777 $(NAME)
-	@echo "----------------"
+	@echo "--------------------------------"
 	@echo "change permission of $(NAME) done.\n"
 
 # Compile Targets
@@ -67,6 +67,7 @@ $(OBJECTS_DIR):
 # Clean Targets
 clean:
 	rm -f $(OBJECTS)
+	rm -d $(OBJECTS_DIR)
 	make -C $(LIBFT_DIR) clean
 fclean: clean
 	rm -f $(OUTPUT_DIR)/$(NAME)
@@ -78,7 +79,7 @@ libft: $(LIBFT)
 $(LIBFT):
 	@echo "Compiling libft library..."
 	make -C $(LIBFT_DIR)
-	@echo "--------------------------------"
+	@echo "----------------"
 	@echo "make libft done.\n"
 
 # # bonus
