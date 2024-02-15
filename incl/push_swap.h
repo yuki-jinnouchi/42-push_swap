@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:55:11 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/14 07:22:07 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:07:31 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_vars
 	int				arg_size;
 	struct s_stack	*head_a;
 	struct s_stack	*head_b;
-	struct s_pivot	*pivot;
+	struct s_pivot	*head_pivot;
 	int				min;
 	int				avg;
 	int				max;
@@ -87,7 +87,7 @@ void	push_swap_push_pivot(t_vars *vars);
 // push_swap_operation.c
 void	push_swap_pushes(t_stack *head, t_vars *vars);
 void	push_swap_swaps(t_stack *head, int i, t_vars *vars);
-void	push_swap_rotates(t_stack *head, int , t_vars *vars);
+void	push_swap_rotates(t_stack *head, int i, t_vars *vars);
 void	push_swap_reverse_rotates(t_stack *head, int i, t_vars *vars);
 
 // push_swap_stack_util.c
@@ -121,13 +121,16 @@ void	push_swap_quicksort(t_vars *vars);
 void	push_swap_dfs(t_vars *vars);
 
 // push_swap_log_steps.c
-void	push_swap_free_step(t_step *head);
 void	push_swap_add_step(t_step *add, t_vars *vars);
 void	push_swap_log_steps(int int_command, char *command, t_vars *vars);
 
-// push_swap_error.c
+// push_swap_free.c
+void	push_swap_free_vars(t_vars *vars);
+void	push_swap_free_step(t_step *head);
 void	push_swap_free_stack(t_stack *head);
 void	push_swap_free_pivot(t_pivot *head);
+
+// push_swap_error.c
 void	push_swap_error(char *message, t_vars *vars);
 
 // push_swap_print.c
