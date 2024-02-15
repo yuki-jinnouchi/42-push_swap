@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 04:03:01 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/14 07:39:59 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:11:46 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	push_swap_pushes(t_stack *head, t_vars *vars)
 		push_swap_log_steps(1, "pa\n", vars);
 	else
 		push_swap_log_steps(2, "pb\n", vars);
-	// ft_putstr_fd("p", 1);
+	// ft_putstr_fd("p", 1); TODO: remove
 	// ft_putchar_fd(head->name, 1);
 	// ft_putstr_fd("\n", 1);
 }
@@ -92,7 +92,7 @@ void	push_swap_rotates(t_stack *head, int i, t_vars *vars)
 		push_swap_log_steps(7, "rb\n", vars);
 	else
 		push_swap_log_steps(8, "rr\n", vars);
-	// ft_putstr_fd("r", 1);
+	// ft_putstr_fd("r", 1); TODO: remove
 	// if (i == 0)
 	// 	ft_putchar_fd(head->name, 1);
 	// if (i == 1)
@@ -123,7 +123,7 @@ void	push_swap_reverse_rotates(t_stack *head, int i, t_vars *vars)
 		push_swap_log_steps(10, "rrb\n", vars);
 	else
 		push_swap_log_steps(11, "rrr\n", vars);
-	// ft_putstr_fd("rr", 1);
+	// ft_putstr_fd("rr", 1); TODO: remove
 	// if (i == 0)
 	// 	ft_putchar_fd(head->name, 1);
 	// if (i == 1)

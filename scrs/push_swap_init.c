@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/15 15:55:13 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:07:53 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	push_swap_init(int argc, char **argv, t_vars *vars)
 
 	vars->head_a = push_swap_new_element();
 	vars->head_b = push_swap_new_element();
+	vars->head_pivot = NULL;
+	vars->head_step = NULL;
 	if (vars->head_a == NULL || vars->head_b == NULL)
 		push_swap_error("head malloc error", vars);
 	if (argc == 2)

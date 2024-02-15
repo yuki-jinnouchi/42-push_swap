@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/14 10:17:41 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:10:51 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int push_swap_step_optimize_2step(t_step *head)
 			(temp->int_command == 11 && temp->next->int_command == 8) || \
 			(temp->int_command == 3 && temp->next->int_command == 3) || \
 			(temp->int_command == 4 && temp->next->int_command == 4) || \
-			(temp->int_command == 5 && temp->next->int_command == 5))
+			(temp->int_command == 5 && temp->next->int_command == 5)) TODO: shorten
 		{
 			next = temp->next->next;
 			flag = push_swap_skip_2step(temp);

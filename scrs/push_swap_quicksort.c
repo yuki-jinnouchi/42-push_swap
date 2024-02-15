@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/14 07:41:49 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:11:28 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	push_swap_push_half(t_vars *vars)
 	int			size;
 	int			count;
 
-	// ft_putstr_fd(" --- push_swap_push_half --- \n", 1);
+	// ft_putstr_fd(" --- push_swap_push_half --- \n", 1); TODO: remove
 	if (vars->dir == 0)
 		push_swap_push_pivot(vars);
 	if (vars->dir == 1)
@@ -54,7 +54,7 @@ void	push_swap_back_half(t_vars *vars)
 {
 	int			count;
 
-	// ft_putstr_fd(" --- push_swap_back_half --- \n", 1);
+	// ft_putstr_fd(" --- push_swap_back_half --- \n", 1); TODO: remove
 	vars->max = vars->avg;
 	push_swap_push_pivot(vars);
 	vars->avg = (vars->min + vars->max) / 2;
@@ -74,7 +74,7 @@ void	push_swap_small_sort_push_a(t_vars *vars)
 {
 	int	size;
 
-	// ft_putstr_fd(" --- push_swap_small_sort_push_a --- \n", 1);
+	// ft_putstr_fd(" --- push_swap_small_sort_push_a --- \n", 1); TODO: remove
 	vars->max = vars->avg;
 	vars->avg = (vars->min + vars->max) / 2;
 	size = push_swap_count_stack(vars->head_b);
@@ -97,7 +97,7 @@ void	push_swap_small_sort_rotate_a(t_vars *vars)
 {
 	int	size;
 
-	// ft_putstr_fd(" --- push_swap_small_sort_rotate_a --- \n", 1);
+	// ft_putstr_fd(" --- push_swap_small_sort_rotate_a --- \n", 1); TODO: remove
 	size = vars->max - vars->min + 1;
 	if (size > 1)
 	{
@@ -129,6 +129,6 @@ void	push_swap_quicksort(t_vars *vars)
 		}
 		else
 			push_swap_back_half(vars);
-		// print_status(vars);
+		// print_status(vars); TODO: remove
 	}
 }
