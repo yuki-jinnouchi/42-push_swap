@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 18:55:11 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/15 16:07:31 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:33:01 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ void	push_swap_log_steps(int int_command, char *command, t_vars *vars);
 
 // push_swap_free.c
 void	push_swap_free_vars(t_vars *vars);
-void	push_swap_free_step(t_step *head);
 void	push_swap_free_stack(t_stack *head);
 void	push_swap_free_pivot(t_pivot *head);
+void	push_swap_free_step(t_step *head);
 
 // push_swap_error.c
 void	push_swap_error(char *message, t_vars *vars);
