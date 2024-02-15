@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/15 16:00:09 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:10:39 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_step
 }	t_step;
 */
 
-// void	push_swap_add_step(t_step *new_step, t_vars *vars);
-// void	push_swap_log_steps(int int_command, char *command, t_vars *vars);
+void	push_swap_add_step(t_step *new_step, t_vars *vars);
+void	push_swap_log_steps(int int_command, char *command, t_vars *vars);
 
 void	push_swap_add_step(t_step *new_step, t_vars *vars)
 {
@@ -54,7 +54,7 @@ void	push_swap_log_steps(int int_command, char *command, t_vars *vars)
 		return ;
 	temp->command = ft_strdup(command);
 	temp->int_command = int_command;
-	// temp->depth = 0;
+	// temp->depth = 0; TODO: delete
 	// temp->max_command = 0;
 	temp->copy_head_a = push_swap_copy_stack(vars->head_a);
 	temp->copy_head_a->opposite = push_swap_copy_stack(vars->head_b);
