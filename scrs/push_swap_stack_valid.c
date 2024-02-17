@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 09:26:24 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:09:24 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	push_swap_2stack_compare_wrap(t_stack *head_i, t_stack *head_j)
 }
 */
 
-int push_swap_pairs_compare_order(t_pair *pair_i, t_pair *pair_j)
+int	push_swap_pairs_compare_order(t_pair *pair_i, t_pair *pair_j)
 {
 	if (push_swap_stack_compare_order(pair_i->head_a, pair_j->head_a) == FALSE)
 		return (FALSE);
@@ -74,7 +74,7 @@ int	push_swap_stack_compare_order(t_stack *head_i, t_stack *head_j)
 	return (TRUE);
 }
 
-int		push_swap_is_pair_completed(t_pair *pair)
+int	push_swap_is_pair_completed(t_pair *pair)
 {
 	if (push_swap_is_sorted(pair->head_a) == FALSE)
 		return (FALSE);

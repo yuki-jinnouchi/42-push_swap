@@ -6,14 +6,14 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 18:34:26 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:51:27 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void 	push_swap_free_temp_args(t_vars *vars);
-void 	push_swap_free_pair(t_pair *pair);
+void	push_swap_free_temp_args(t_vars *vars);
+void	push_swap_free_pair(t_pair *pair);
 void	push_swap_free_vars(t_vars *vars);
 void	push_swap_free_stack(t_stack *head);
 void	push_swap_free_pivot(t_pivot *head);
@@ -35,7 +35,7 @@ void	push_swap_free_temp_args(t_vars *vars)
 	vars->arg_temp = NULL;
 }
 
-void 	push_swap_free_pair(t_pair *pair)
+void	push_swap_free_pair(t_pair *pair)
 {
 	if (pair->head_a != NULL)
 		push_swap_free_stack(pair->head_a);

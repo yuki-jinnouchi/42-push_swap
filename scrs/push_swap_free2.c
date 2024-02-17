@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 18:40:10 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:50:44 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	push_swap_free_step(t_step *head)
 	t_step	*prev;
 
 	temp = head->next;
-	while (temp!= head)
+	while (temp != head)
 	{
 		push_swap_free_pair(temp->pair);
 		free(temp->command);

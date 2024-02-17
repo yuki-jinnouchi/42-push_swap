@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 18:40:01 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:10:56 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 t_queue	*push_swap_queue_init(t_step *head);
 void	push_swap_move_pair(t_pair *pair, int command, int direction);
 int		push_swap_count_step(t_step *head, t_vars *vars);
-int 	push_swap_valid_queue(t_queue *queue, int step_ahead, t_vars *vars);
+int		push_swap_valid_queue(t_queue *queue, int step_ahead, t_vars *vars);
 int		push_swap_bfs(t_step *head, t_vars *vars);
 
 t_queue	*push_swap_queue_init(t_step *head)
 {
 	t_queue	*queue;
-	int 	i;
+	int		i;
 
 	queue = (t_queue *) malloc(sizeof(t_queue));
 	queue->commands = (int *) malloc(sizeof(int) * (DEPTH_MAX + 1));
@@ -44,7 +44,6 @@ t_queue	*push_swap_queue_init(t_step *head)
 	queue->root_head_a = head;
 	return (queue);
 }
-
 
 void	push_swap_move_pair(t_pair *pair, int command, int direction)
 {
@@ -73,32 +72,6 @@ void	push_swap_move_pair(t_pair *pair, int command, int direction)
 	return ;
 }
 
-int push_swap_valid_avoid_null_ops(int command, t_pair *pair)
-{
-	int count_a;
-	int count_b;
-
-	count_a = push_swap_count_stack(pair->head_a);
-	count_b = push_swap_count_stack(pair->head_b);
-	if (command == 1 && count_b == 0)
-		command = 2;
-	if (command == 2 && count_a == 0)
-		command = 3;
-	if (command == 3 && count_a == 0)
-		command = 4;
-	if (command == 4 && count_b == 0)
-		command = 5;
-	if (command == 5 && (count_a == 0 || count_b == 0))
-		command = 6;
-	while (((command == 6 || command == 9) && count_a < 2) || \
-		((command == 7 || command == 10) && count_b < 2) || \
-		((command == 8 || command == 11) && (count_a < 2 || count_b < 2)))
-		command++;
-	if (command > 11)
-		command = 12;
-	return (command);
-}
-
 int	push_swap_count_step(t_step *head, t_vars *vars)
 {
 	t_step	*temp;
@@ -114,7 +87,7 @@ int	push_swap_count_step(t_step *head, t_vars *vars)
 	return (count);
 }
 
-int push_swap_valid_queue(t_queue *queue, int step_ahead, t_vars *vars)
+int	push_swap_valid_queue(t_queue *queue, int step_ahead, t_vars *vars)
 {
 	t_step	*temp;
 	t_pair	*temp_pair;
@@ -131,14 +104,9 @@ int push_swap_valid_queue(t_queue *queue, int step_ahead, t_vars *vars)
 	}
 	while (count > 0 && flag == FAILURE)
 	{
-		
 		if (count > queue->depth && \
 			push_swap_pairs_compare_order(temp->pair, queue->pair) == TRUE)
 		{
-			// fprintf(stderr, "valid_queue: temp  ");
-			// push_swap_print_stack_order(temp->pair->head_a);
-			// fprintf(stderr, "valid_queue: queue ");
-			// push_swap_print_stack_order(queue->pair->head_a);
 			flag = SUCCESS;
 			queue->find_length = count;
 		}
@@ -148,7 +116,8 @@ int push_swap_valid_queue(t_queue *queue, int step_ahead, t_vars *vars)
 	return (flag);
 }
 
-int push_swap_renew_step(t_queue *queue, t_step *head, int find_length, t_vars *vars)
+int	push_swap_renew_step(t_queue *queue, t_step *head, \
+	int find_length, t_vars *vars)
 {
 	t_step	*temp_step;
 	t_pair	*temp_pair;
@@ -156,32 +125,22 @@ int push_swap_renew_step(t_queue *queue, t_step *head, int find_length, t_vars *
 	t_step	*next;
 	int		count;
 
-	// fprintf(stderr, "find_length: %d\n", find_length);
-	// fprintf(stderr, "queue->depth: %d\n", queue->depth);
-	// fprintf(stderr, "head_step "); push_swap_print_stack_order(head->pair->head_a);
-	// fprintf(stderr, "queue     "); push_swap_print_stack_order(queue->pair->head_a);
-	// print_queue(queue);
 	temp_step = head->next;
 	count = 0;
 	while (count < queue->depth)
 	{
 		temp_step->int_command = queue->commands[count];
-		// fprintf(stderr, "queue->commands[count]: %d\n", queue->commands[count]);
 		free(temp_step->command);
 		temp_step->command = NULL;
 		temp_pair = push_swap_copy_pair(temp_step->prev->pair);
 		push_swap_free_pair(temp_step->pair);
-		push_swap_move_pair(temp_pair, temp_step->int_command , 0);
+		push_swap_move_pair(temp_pair, temp_step->int_command, 0);
 		temp_step->pair = temp_pair;
-		// push_swap_print_stack_order(temp_step->pair->head_a);
 		temp_step = temp_step->next;
 		count++;
 	}
-	// fprintf(stderr, "temp_step "); push_swap_print_stack_order(temp_step->pair->head_a);
-	// fprintf(stderr, "queue     "); push_swap_print_stack_order(queue->pair->head_a);
-	// fprintf(stderr, "count: %d\n", count);
 	tail = temp_step->prev;
-	while(count < find_length)
+	while (count < find_length)
 	{
 		next = temp_step->next;
 		push_swap_free_one_step(temp_step);
@@ -198,8 +157,8 @@ int	push_swap_bfs(t_step *head, t_vars *vars)
 	t_queue	*queue;
 	int		command;
 	int		flag;
-	int 	flag2;
-	int 	step_ahead;
+	int		flag2;
+	int		step_ahead;
 
 	flag = FAILURE;
 	flag2 = SUCCESS;
@@ -211,24 +170,11 @@ int	push_swap_bfs(t_step *head, t_vars *vars)
 	{
 		flag2 = push_swap_move_queue(queue, step_ahead);
 		if (push_swap_valid_queue(queue, step_ahead, vars) == SUCCESS)
-		{
-			// fprintf(stderr, "success!\n");
 			flag = SUCCESS;
-			// print_queue(queue);
-			// push_swap_print_step(queue->root_head_a, NULL);
-			// usleep(100000);
-		}
 	}
 	if (flag == SUCCESS)
-	{
-		// push_swap_print_stack_order(temp->pair->head_a);
-		// push_swap_print_stack_order(queue->pair->head_a);
-		// push_swap_print_step(vars->head_step, NULL);
-		push_swap_renew_step(queue, queue->root_head_a, queue->find_length, vars);
-	}
-	// fprintf(stderr, "nukemasu\n\n");
-	// push_swap_print_step(vars->head_step, NULL);
+		push_swap_renew_step(queue, queue->root_head_a, \
+			queue->find_length, vars);
 	push_swap_free_queue(queue);
-	// fprintf(stderr, "----------\n\n");
 	return (flag);
 }
