@@ -6,16 +6,43 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/15 17:11:57 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:34:26 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void 	push_swap_free_temp_args(t_vars *vars);
+void 	push_swap_free_pair(t_pair *pair);
 void	push_swap_free_vars(t_vars *vars);
 void	push_swap_free_stack(t_stack *head);
 void	push_swap_free_pivot(t_pivot *head);
-void	push_swap_free_step(t_step *head);
+
+void	push_swap_free_temp_args(t_vars *vars)
+{
+	int	arg_count;
+
+	if (vars->arg_temp)
+	{
+		arg_count = 0;
+		while (vars->arg_temp[arg_count] != NULL)
+		{
+			free(vars->arg_temp[arg_count]++);
+			arg_count++;
+		}
+		free(vars->arg_temp);
+	}
+	vars->arg_temp = NULL;
+}
+
+void 	push_swap_free_pair(t_pair *pair)
+{
+	if (pair->head_a != NULL)
+		push_swap_free_stack(pair->head_a);
+	if (pair->head_b != NULL)
+		push_swap_free_stack(pair->head_b);
+	free(pair);
+}
 
 void	push_swap_free_vars(t_vars *vars)
 {
@@ -27,6 +54,8 @@ void	push_swap_free_vars(t_vars *vars)
 		push_swap_free_pivot(vars->head_pivot);
 	if (vars->head_step)
 		push_swap_free_step(vars->head_step);
+	if (vars->pair)
+		free(vars->pair);
 	free(vars);
 	return ;
 }
@@ -63,43 +92,3 @@ void	push_swap_free_pivot(t_pivot *head)
 	head = NULL;
 	return ;
 }
-
-void	push_swap_free_step(t_step *head)
-{
-	t_step	*temp;
-	t_step	*prev;
-
-	temp = head->next;
-	while (temp!= head)
-	{
-		push_swap_free_stack(temp->copy_head_a->opposite);
-		push_swap_free_stack(temp->copy_head_a);
-		free(temp->command);
-		prev = temp;
-		temp = temp->next;
-		free(prev);
-	}
-	push_swap_free_stack(temp->copy_head_a->opposite);
-	push_swap_free_stack(temp->copy_head_a);
-	free(temp->command);
-	free(temp);
-	head = NULL;
-	return ;
-}
-
-// void	push_swap_free_dummy_step(t_step *head) TODO: remove
-// {
-// 	t_step	*temp;
-// 	t_step	*prev;
-
-// 	temp = head->next;
-// 	while (temp != head)
-// 	{
-// 		prev = temp;
-// 		temp = temp->next;
-// 		free(prev);
-// 	}
-// 	free(temp);
-// 	return ;
-// }
-

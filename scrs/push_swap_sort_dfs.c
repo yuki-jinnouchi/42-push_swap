@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/14 06:50:12 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:40:01 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,119 +21,214 @@
 // 	struct s_step	*next;
 // }	t_step;
 // */
-// void	push_swap_dfs(t_vars *vars);
+
+t_queue	*push_swap_queue_init(t_step *head);
+void	push_swap_move_pair(t_pair *pair, int command, int direction);
+int		push_swap_count_step(t_step *head, t_vars *vars);
+int 	push_swap_valid_queue(t_queue *queue, int step_ahead, t_vars *vars);
+int		push_swap_bfs(t_step *head, t_vars *vars);
+
+t_queue	*push_swap_queue_init(t_step *head)
+{
+	t_queue	*queue;
+	int 	i;
+
+	queue = (t_queue *) malloc(sizeof(t_queue));
+	queue->commands = (int *) malloc(sizeof(int) * (DEPTH_MAX + 1));
+	i = 0;
+	while (i <= DEPTH_MAX)
+		queue->commands[i++] = 0;
+	queue->depth = 0;
+	queue->depth_basis = 1;
+	queue->pair = push_swap_copy_pair(head->pair);
+	queue->root_head_a = head;
+	return (queue);
+}
 
 
-// void	push_swap_dfs(t_vars *vars)
-// {
-// 	long	command;
+void	push_swap_move_pair(t_pair *pair, int command, int direction)
+{
+	if ((command == 1 && direction == 0) || (command == 2 && direction == 1))
+		push_swap_pa(pair, NULL);
+	if ((command == 2 && direction == 0) || (command == 1 && direction == 1))
+		push_swap_pb(pair, NULL);
+	if ((command == 3 && direction == 0) || (command == 3 && direction == 1))
+		push_swap_sa(pair, NULL);
+	if ((command == 4 && direction == 0) || (command == 4 && direction == 1))
+		push_swap_sb(pair, NULL);
+	if ((command == 5 && direction == 0) || (command == 5 && direction == 1))
+		push_swap_ss(pair, NULL);
+	if ((command == 6 && direction == 0) || (command == 9 && direction == 1))
+		push_swap_ra(pair, NULL);
+	if ((command == 7 && direction == 0) || (command == 10 && direction == 1))
+		push_swap_rb(pair, NULL);
+	if ((command == 8 && direction == 0) || (command == 11 && direction == 1))
+		push_swap_rr(pair, NULL);
+	if ((command == 9 && direction == 0) || (command == 6 && direction == 1))
+		push_swap_rra(pair, NULL);
+	if ((command == 10 && direction == 0) || (command == 7 && direction == 1))
+		push_swap_rrb(pair, NULL);
+	if ((command == 11 && direction == 0) || (command == 8 && direction == 1))
+		push_swap_rrr(pair, NULL);
+	return ;
+}
 
-// 	push_swap_step_init(); //
-	
-// 	// 今のターン数が、既存の解答ターン数と同じなら、枝切り。
-// 	// これ以上探索しても短い手じゃないから。
-// 	if (turn >= t->max_turn)
-// 		return ;
+int push_swap_valid_avoid_null_ops(int command, t_pair *pair)
+{
+	int count_a;
+	int count_b;
 
-// 	// スタックaが昇順ソートになったら解答。t->max_turn(今の最短手数)を更新する。
-// 	if (flag = 1 and len < maxlen)
-// 		return (ans_update(turn, t));
+	count_a = push_swap_count_stack(pair->head_a);
+	count_b = push_swap_count_stack(pair->head_b);
+	if (command == 1 && count_b == 0)
+		command = 2;
+	if (command == 2 && count_a == 0)
+		command = 3;
+	if (command == 3 && count_a == 0)
+		command = 4;
+	if (command == 4 && count_b == 0)
+		command = 5;
+	if (command == 5 && (count_a == 0 || count_b == 0))
+		command = 6;
+	while (((command == 6 || command == 9) && count_a < 2) || \
+		((command == 7 || command == 10) && count_b < 2) || \
+		((command == 8 || command == 11) && (count_a < 2 || count_b < 2)))
+		command++;
+	if (command > 11)
+		command = 12;
+	return (command);
+}
 
-// 	// ra, saなど11の操作を数値化したもの。
-// 	command = -1;
+int	push_swap_count_step(t_step *head, t_vars *vars)
+{
+	t_step	*temp;
+	int		count;
 
-// 	while (++command < 11)
-// 	{
-// 		// たとえば PA -> PB は、手数が増えるだけなので、枝切り。
-// 		if (avoid_check(command, t) || turn >= t->max_turn)
-// 			continue;
+	temp = head;
+	count = 0;
+	while (temp->next != vars->head_step)
+	{
+		temp = temp->next;
+		count++;
+	}
+	return (count);
+}
 
-// 		// raとかpbとか、コマンド実行。スタックa, bを変更させちゃう。
-// 		if (change_dlst(a, b, command, true))
-// 			continue;
+int push_swap_valid_queue(t_queue *queue, int step_ahead, t_vars *vars)
+{
+	t_step	*temp;
+	t_pair	*temp_pair;
+	int		count;
+	int		flag;
 
-// 		// 次の手を見に行く
-// 		dfs(a, b, t, turn + 1);
+	flag = FAILURE;
+	temp = queue->root_head_a;
+	count = 0;
+	while (count < step_ahead && count < 10)
+	{
+		temp = temp->next;
+		count ++;
+	}
+	while (count > 0 && flag == FAILURE)
+	{
+		
+		if (count > queue->depth && \
+			push_swap_pairs_compare_order(temp->pair, queue->pair) == TRUE)
+		{
+			// fprintf(stderr, "valid_queue: temp  ");
+			// push_swap_print_stack_order(temp->pair->head_a);
+			// fprintf(stderr, "valid_queue: queue ");
+			// push_swap_print_stack_order(queue->pair->head_a);
+			flag = SUCCESS;
+			queue->find_length = count;
+		}
+		temp = temp->prev;
+		count--;
+	}
+	return (flag);
+}
 
-// 		// バックトラック法
-// 		// スタックa, bの復元。さっきの反対コマンドを行う。raならrraで復元。
-// 		change_dlst(a, b, command, false);
-// 	}
-// }
+int push_swap_renew_step(t_queue *queue, t_step *head, int find_length, t_vars *vars)
+{
+	t_step	*temp_step;
+	t_pair	*temp_pair;
+	t_step	*tail;
+	t_step	*next;
+	int		count;
 
-// /*
+	// fprintf(stderr, "find_length: %d\n", find_length);
+	// fprintf(stderr, "queue->depth: %d\n", queue->depth);
+	// fprintf(stderr, "head_step "); push_swap_print_stack_order(head->pair->head_a);
+	// fprintf(stderr, "queue     "); push_swap_print_stack_order(queue->pair->head_a);
+	// print_queue(queue);
+	temp_step = head->next;
+	count = 0;
+	while (count < queue->depth)
+	{
+		temp_step->int_command = queue->commands[count];
+		// fprintf(stderr, "queue->commands[count]: %d\n", queue->commands[count]);
+		free(temp_step->command);
+		temp_step->command = NULL;
+		temp_pair = push_swap_copy_pair(temp_step->prev->pair);
+		push_swap_free_pair(temp_step->pair);
+		push_swap_move_pair(temp_pair, temp_step->int_command , 0);
+		temp_step->pair = temp_pair;
+		// push_swap_print_stack_order(temp_step->pair->head_a);
+		temp_step = temp_step->next;
+		count++;
+	}
+	// fprintf(stderr, "temp_step "); push_swap_print_stack_order(temp_step->pair->head_a);
+	// fprintf(stderr, "queue     "); push_swap_print_stack_order(queue->pair->head_a);
+	// fprintf(stderr, "count: %d\n", count);
+	tail = temp_step->prev;
+	while(count < find_length)
+	{
+		next = temp_step->next;
+		push_swap_free_one_step(temp_step);
+		temp_step = next;
+		count++;
+	}
+	tail->next = temp_step;
+	temp_step->prev = tail;
+	return (count);
+}
 
-// queue<int> q;
-// Object start = {~~~, 0};  // 深さ 0
-// q.push(start);  // 初期状態をキューに入れる
+int	push_swap_bfs(t_step *head, t_vars *vars)
+{
+	t_queue	*queue;
+	int		command;
+	int		flag;
+	int 	flag2;
+	int 	step_ahead;
 
-// int bfs() {
-//     while (!q.empty()) {
-//         // キューの先頭の要素を取り出す dequeue(pop)
-//         Object now = q.front(); q.pop();
-
-//         // 停止条件
-//         // if (now.hoge == target) return ~;  // 探索対象
-//         if (now.hoge == N) return ~;
-
-//         // BFS
-//         for (int i = 0; i < 次のノード（状態）の数; ++i) {
-//             Object next = {~~~, depth+1};  // 深さ（ステップ数）を一つ足す
-//             if (条件) {
-//                 // 条件を満たしたら enqueue(push)
-//                 // 問題により，同じ状態に戻らないようにする処理を書く（無限ループを防ぐ）
-//                 q.push(next);
-//             }
-//         }
-//     }
-// }
-// */
-
-
-// /*
-// #include <bits/stdc++.h>
-// #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-// #define repi(i, a, b) for (int i = (int)(a); i < (int)(b); i++)
-// #define rrep(i, n) for (int i = n; i > (int)(0); i--)
-// #define rrepi(i, a, b) for (int i = (int)(a); i > (int)(b); i--)
-// using namespace std;
-
-// int main()
-// {
-// 	// 作りかけの数列を格納するqueueを作る
-// 	queue<vector<int>> que;
-// 	// 1~4を格納しておく
-// 	rep(i, 4){
-// 		vector<int> initial = {i+1};
-// 		que.push(initial);
-// 	}
-
-// 	// スタックが空になるまで繰り返す
-// 	while (!que.empty()){
-// 		// スタックの頭にあるものを取り出す
-// 		vector<int> elem = que.front();
-
-// 		// 処理した先頭の要素は削除しておく
-// 		que.pop();
-
-// 		// もし数列の長さが3であれば解答出力
-// 		if (elem.size()==3){
-// 				for (auto x : elem) cout << x;
-// 				cout << endl;
-// 			}
-
-// 		// まだ数列の長さが3でなければ「前の要素以上の4以下の」要素を付け加える
-// 		else {
-// 			// ここでも1~4を格納しておく
-// 			repi(i, elem[elem.size()-1], 4){
-// 					// 要素を付け加える新しい数列
-// 					vector<int> elem_new = elem;
-// 					// 要素を付け加える
-// 					elem_new.push_back(i);
-// 					// キューに入れる
-// 					que.push(elem_new);
-// 			}
-// 		}
-// 	}
-// }
-// */
+	flag = FAILURE;
+	flag2 = SUCCESS;
+	step_ahead = push_swap_count_step(head, vars);
+	if (step_ahead < 2)
+		return (FAILURE);
+	queue = push_swap_queue_init(head);
+	while (queue->depth < DEPTH_MAX && flag == FAILURE && flag2 == SUCCESS)
+	{
+		flag2 = push_swap_move_queue(queue, step_ahead);
+		if (push_swap_valid_queue(queue, step_ahead, vars) == SUCCESS)
+		{
+			// fprintf(stderr, "success!\n");
+			flag = SUCCESS;
+			// print_queue(queue);
+			// push_swap_print_step(queue->root_head_a, NULL);
+			// usleep(100000);
+		}
+	}
+	if (flag == SUCCESS)
+	{
+		// push_swap_print_stack_order(temp->pair->head_a);
+		// push_swap_print_stack_order(queue->pair->head_a);
+		// push_swap_print_step(vars->head_step, NULL);
+		push_swap_renew_step(queue, queue->root_head_a, queue->find_length, vars);
+	}
+	// fprintf(stderr, "nukemasu\n\n");
+	// push_swap_print_step(vars->head_step, NULL);
+	push_swap_free_queue(queue);
+	// fprintf(stderr, "----------\n\n");
+	return (flag);
+}
