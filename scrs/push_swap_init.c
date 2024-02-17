@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:46:16 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/15 17:07:53 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:26:00 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_tack
 t_stack	*push_swap_new_element(void);
 t_stack	*push_swap_add_element(t_stack *head, int number);
 void	push_swap_vars_init(t_vars *vars);
-void	push_swap_init(int argc, char **argv, t_vars *vars);
+void	push_swap_stack_init(int argc, char **argv, t_vars *vars);
 
 t_stack	*push_swap_new_element(void)
 {
@@ -37,6 +37,7 @@ t_stack	*push_swap_new_element(void)
 	ptr->number = 0;
 	ptr->order = 0;
 	ptr->name = 0;
+	ptr->opposite = NULL;
 	ptr->next = ptr;
 	ptr->prev = ptr;
 	return (ptr);
@@ -54,41 +55,13 @@ t_stack	*push_swap_add_element(t_stack *head, int number)
 	return (new);
 }
 
-void	push_swap_vars_init(t_vars *vars)
-{
-	int	arg_count;
-
-	arg_count = 0;
-	if (arg_count == 1)
-	{
-		arg_count = 0;
-		while (vars->arg_temp[arg_count] != NULL)
-			free(vars->arg_temp[arg_count]++);
-		free(vars->arg_temp);
-		vars->arg_temp = NULL;
-	}
-	vars->head_a->name = 'a';
-	vars->head_b->name = 'b';
-	vars->head_a->opposite = vars->head_b;
-	vars->head_b->opposite = vars->head_a;
-	vars->arg_size = push_swap_count_stack(vars->head_a);
-	vars->head_pivot = NULL;
-	vars->min = 1;
-	vars->max = vars->arg_size;
-	vars->avg = (vars->max + vars->min) / 2;
-	vars->dir = 0;
-	vars->head_step = NULL;
-}
-
-void	push_swap_init(int argc, char **argv, t_vars *vars)
+void	push_swap_stack_init(int argc, char **argv, t_vars *vars)
 {
 	int	arg_count;
 	int	number;
 
 	vars->head_a = push_swap_new_element();
 	vars->head_b = push_swap_new_element();
-	vars->head_pivot = NULL;
-	vars->head_step = NULL;
 	if (vars->head_a == NULL || vars->head_b == NULL)
 		push_swap_error("head malloc error", vars);
 	if (argc == 2)
@@ -105,6 +78,25 @@ void	push_swap_init(int argc, char **argv, t_vars *vars)
 			push_swap_error("elem malloc error", vars);
 		arg_count++;
 	}
-	push_swap_vars_init(vars);
 	return ;
+}
+
+void	push_swap_vars_init(t_vars *vars)
+{
+	vars->pair = malloc(sizeof(t_pair));
+	if (vars->pair == NULL)
+		push_swap_error("pair malloc error", vars);
+	vars->pair->head_a = vars->head_a;
+	vars->pair->head_b = vars->head_b;
+	vars->head_a->name = 'a';
+	vars->head_b->name = 'b';
+	vars->head_a->opposite = vars->head_b;
+	vars->head_b->opposite = vars->head_a;
+	vars->head_pivot = NULL;
+	vars->arg_size = push_swap_count_stack(vars->head_a);
+	vars->min = 1;
+	vars->max = vars->arg_size;
+	vars->avg = (vars->max + vars->min) / 2;
+	vars->dir = 0;
+	vars->head_step = NULL;
 }
