@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 16:41:58 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:55:48 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*push_swap_get_command_name(int command);
 void	push_swap_print_step(t_step *head, t_vars *vars);
 
-char *push_swap_get_command_name(int command)
+char	*push_swap_get_command_name(int command)
 {
 	if (command == 1)
 		return (ft_strdup("pa\n"));
@@ -44,15 +44,14 @@ char *push_swap_get_command_name(int command)
 
 void	push_swap_print_step(t_step *head, t_vars *vars)
 {
-	t_step *temp;
-	char *command;
+	t_step	*temp;
+	char	*command;
 
 	temp = head->next;
 	while (temp != head)
 	{
 		command = push_swap_get_command_name(temp->int_command);
 		ft_putstr_fd(command, 1);
-		// push_swap_print_stack_order(temp->pair->head_a);
 		free(command);
 		temp = temp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 12:35:01 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:53:18 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ t_stack	*push_swap_copy_stack(t_stack *head)
 	{
 		copy_temp = push_swap_new_copy_element(src_temp, copy_head, copy_prev);
 		if (copy_temp == NULL)
-		{
-			push_swap_free_stack(copy_head);
 			return (NULL);
-		}
 		copy_prev = copy_temp;
 		src_temp = src_temp->next;
 	}

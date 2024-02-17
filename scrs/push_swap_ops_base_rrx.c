@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 04:03:01 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 12:40:56 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:54:47 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ The last element becomes the first one.*/
 void	push_swap_rra(t_pair *stack, t_vars *vars)
 {
 	t_stack	*temp;
-	// push_swap_print_stack_order(stack->head_a);
+
 	if (push_swap_count_stack(stack->head_a) > 1)
 	{
 		temp = push_swap_pop(stack->head_a->prev->prev);
-		// ft_putnbr_fd(stack->head_a->prev->prev->prev->number, 2);
 		push_swap_push(stack->head_a, temp);
 	}
 	if (vars != NULL)

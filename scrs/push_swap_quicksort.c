@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 18:38:03 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:59:46 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ void	push_swap_push_half(t_vars *vars)
 	int			size;
 	int			count;
 
-	// ft_putstr_fd(" --- push_swap_push_half --- \n", 1); TODO: remove
-	if (vars->dir == 0)
-		push_swap_push_pivot(vars);
-	if (vars->dir == 1)
-		vars->max = push_swap_pop_pivot(vars);
 	vars->avg = (vars->min + vars->max) / 2;
 	size = vars->max - vars->min + 1;
 	count = 0;
@@ -53,7 +48,6 @@ void	push_swap_back_half(t_vars *vars)
 {
 	int			count;
 
-	// ft_putstr_fd(" --- push_swap_back_half --- \n", 1); TODO: remove
 	vars->max = vars->avg;
 	push_swap_push_pivot(vars);
 	vars->avg = (vars->min + vars->max) / 2;
@@ -73,7 +67,6 @@ void	push_swap_small_sort_pa(t_vars *vars)
 {
 	int	size;
 
-	// ft_putstr_fd(" --- push_swap_small_sort_pa --- \n", 1); TODO: remove
 	vars->max = vars->avg;
 	vars->avg = (vars->min + vars->max) / 2;
 	size = push_swap_count_stack(vars->head_b);
@@ -96,7 +89,6 @@ void	push_swap_small_sort_ra(t_vars *vars)
 {
 	int	size;
 
-	// ft_putstr_fd(" --- push_swap_small_sort_ra --- \n", 1); TODO: remove
 	size = vars->max - vars->min + 1;
 	if (size > 1)
 	{
@@ -118,7 +110,13 @@ void	push_swap_quicksort(t_vars *vars)
 	while (push_swap_is_pair_completed(vars->pair) == FALSE)
 	{
 		if (push_swap_count_stack(vars->head_b) == 0)
+		{
+			if (vars->dir == 0)
+				push_swap_push_pivot(vars);
+			if (vars->dir == 1)
+				vars->max = push_swap_pop_pivot(vars);
 			push_swap_push_half(vars);
+		}
 		else if (push_swap_count_stack(vars->head_b) < 3)
 		{
 			push_swap_small_sort_pa(vars);
@@ -127,6 +125,5 @@ void	push_swap_quicksort(t_vars *vars)
 		}
 		else
 			push_swap_back_half(vars);
-		// print_status(vars); TODO: remove
 	}
 }

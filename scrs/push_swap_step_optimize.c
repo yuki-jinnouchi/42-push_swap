@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 06:08:24 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:09:36 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	push_swap_skip_2step(t_step *step)
 
 int	push_swap_step_optimize_2step(t_step *head)
 {
-	t_step  *temp;
+	t_step	*temp;
 	t_step	*next;
 	int		flag;
 

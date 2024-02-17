@@ -6,7 +6,7 @@
 /*   By: yjinnouc <yjinnouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 03:31:25 by yjinnouc          #+#    #+#             */
-/*   Updated: 2024/02/17 18:26:38 by yjinnouc         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:05:16 by yjinnouc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,19 @@ int		main(int argc, char **argv);
 
 void	push_swap_exec(t_vars *vars)
 {
-	int 	flag;
-	t_step *step;
-	// int 	num;
+	int		flag;
+	t_step	*temp_step;
 
 	push_swap_quicksort(vars);
 	flag = SUCCESS;
 	while (flag == SUCCESS)
 		flag = push_swap_step_optimize_2step(vars->head_step);
-	// push_swap_print_stack_order(vars->head_step->pair->head_a);
-	// push_swap_print_step(vars->head_step, NULL);
-	step = vars->head_step;
-	while (step->next != vars->head_step)
+	temp_step = vars->head_step;
+	while (temp_step->next != vars->head_step)
 	{
 		flag = SUCCESS;
-		// num = 0;
-		// while(flag == SUCCESS && num < 3)
-		// {
-			flag = push_swap_bfs(step, vars);
-			// num++;
-		// }
-		step = step->next;
-		// fprintf(stderr, "\n");
+		flag = push_swap_bfs(temp_step, vars);
+		temp_step = temp_step->next;
 	}
 	while (flag == SUCCESS)
 		flag = push_swap_step_optimize_2step(vars->head_step);
